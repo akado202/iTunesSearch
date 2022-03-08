@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <string name="tools_word" translatable="false">Lorem</string>
+
+    <string name="tools_sentence" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+
+    <string name="tools_paragraph" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquam interdum lorem, et egestas metus eleifend ut. Proin fermentum, ligula faucibus feugiat laoreet, nisi magna efficitur ligula, a accumsan mi justo ut urna. Phasellus commodo turpis vitae lacus lobortis aliquam. Donec rutrum nunc id est pellentesque, nec scelerisque ipsum vehicula. Duis egestas viverra ligula id finibus. Nunc vel elit in leo posuere tempor. Proin felis ante, lobortis ut turpis sit amet, scelerisque euismod sapien.</string>
+
+</resources>

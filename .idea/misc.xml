@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/workspace/iTunesSearch/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Android/workspace/iTunesSearch/app/src/main/res/layout/fragment_dashboard.xml" value="0.2942708333333333" />
+        <entry key="..\:/Android/workspace/iTunesSearch/app/src/main/res/layout/view_track_item.xml" value="0.2942708333333333" />
+        <entry key="..\:/Android/workspace/iTunesSearch/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2942708333333333" />
       </map>
     </option>
   </component>

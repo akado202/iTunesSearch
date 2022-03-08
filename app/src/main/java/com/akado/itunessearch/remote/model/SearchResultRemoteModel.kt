@@ -3,7 +3,7 @@ package com.akado.itunessearch.remote.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class SearchResult(
+data class SearchResultRemoteModel(
 
     @SerializedName("artistId")
     @Expose
