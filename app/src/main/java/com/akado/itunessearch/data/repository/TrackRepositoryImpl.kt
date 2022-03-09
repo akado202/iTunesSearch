@@ -1,5 +1,6 @@
 package com.akado.itunessearch.data.repository
 
+import com.akado.itunessearch.data.local.TrackLocal
 import com.akado.itunessearch.data.mapper.TrackItemDomainMapper
 import com.akado.itunessearch.data.remote.ITunesRemote
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
@@ -8,7 +9,8 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class TrackRepositoryImpl @Inject constructor(
-    private val dataSource: ITunesRemote
+    private val remote: ITunesRemote,
+    private val local: TrackLocal
 ) : TrackRepository {
 
     override fun requestSearchTrack(
@@ -17,14 +19,13 @@ class TrackRepositoryImpl @Inject constructor(
         limit: Int,
         offset: Int
     ): Single<List<TrackItemDomainModel>> {
-        return dataSource.getSearch(term, entity, limit, offset)
+        return remote.getSearch(term, entity, limit, offset)
             .map { it.map(TrackItemDomainMapper::mapToModel) }
     }
 
     override fun requestFavoriteTrack(): Single<List<TrackItemDomainModel>> {
-        TODO("Not yet implemented")
-        return Single.never()
+        return local.getFavorite()
+            .map { it.map(TrackItemDomainMapper::mapToModel) }
     }
-
 
 }

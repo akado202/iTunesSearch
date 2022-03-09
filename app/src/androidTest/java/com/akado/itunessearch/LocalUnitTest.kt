@@ -64,7 +64,7 @@ class LocalUnitTest {
             "artistName",
             "collectionName",
             "trackName",
-            "artworkUrl60",
+            "https://is4-ssl.mzstatic.com/image/thumb/Music114/v4/64/62/b8/6462b837-977e-d5ba-7011-85ff2882ccc6/source/60x60bb.jpg",
         )
         trackDao.insert(track)
             .doOnComplete { println("Insert complete") }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
+import com.akado.itunessearch.domain.usecase.FavoriteTrackUseCase
 import com.akado.itunessearch.domain.usecase.SearchTrackUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(
-    useCase: SearchTrackUseCase
+    useCase: FavoriteTrackUseCase
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -23,10 +24,10 @@ class FavoriteViewModel @Inject constructor(
     val list: LiveData<List<TrackItemDomainModel>> get() = _list
 
     init {
-//        useCase.requestSearchTrack()
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe { _list.value = it }
-//            .addTo(compositeDisposable)
+        useCase.requestFavoriteTrack()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { _list.value = it }
+            .addTo(compositeDisposable)
     }
 
     override fun onCleared() {

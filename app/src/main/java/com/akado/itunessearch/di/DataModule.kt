@@ -1,5 +1,6 @@
 package com.akado.itunessearch.di
 
+import com.akado.itunessearch.data.local.TrackLocal
 import com.akado.itunessearch.data.remote.ITunesRemote
 import com.akado.itunessearch.data.repository.TrackRepositoryImpl
 import com.akado.itunessearch.domain.repository.TrackRepository
@@ -15,7 +16,10 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideTrackRepository(dataSource: ITunesRemote): TrackRepository {
-        return TrackRepositoryImpl(dataSource)
+    fun provideTrackRepository(
+        remote: ITunesRemote,
+        local: TrackLocal
+    ): TrackRepository {
+        return TrackRepositoryImpl(remote, local)
     }
 }

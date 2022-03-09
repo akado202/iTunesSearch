@@ -1,12 +1,14 @@
 package com.akado.itunessearch.ui.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.akado.itunessearch.databinding.FragmentSearchBinding
+import com.akado.itunessearch.domain.model.TrackItemDomainModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +28,7 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.let {
+            it.view = this
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
@@ -35,5 +38,12 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun onItemClick(model: TrackItemDomainModel) {
+        Log.v(
+            "TrackItemAdapter",
+            "OnClick ivFavorite. ${model.trackId} : ${model.trackName}"
+        )
     }
 }

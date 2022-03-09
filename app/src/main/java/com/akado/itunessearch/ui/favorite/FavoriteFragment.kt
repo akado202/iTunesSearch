@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.akado.itunessearch.databinding.FragmentFavoriteBinding
 import com.akado.itunessearch.databinding.FragmentSearchBinding
+import com.akado.itunessearch.ui.common.TrackItemAdapter
 import com.akado.itunessearch.ui.search.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel

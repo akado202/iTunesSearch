@@ -7,14 +7,6 @@ import com.akado.itunessearch.domain.model.TrackItemDomainModel
 import com.bumptech.glide.Glide
 
 object TrackItemBindingConverter {
-    @BindingAdapter("trackItemAdapter")
-    @JvmStatic
-    fun setTrackItemAdapter(
-        recyclerView: RecyclerView,
-        set: Boolean
-    ) {
-        recyclerView.adapter = if (set) TrackItemAdapter() else null
-    }
 
     @BindingAdapter("trackItems")
     @JvmStatic
@@ -22,12 +14,29 @@ object TrackItemBindingConverter {
         recyclerView: RecyclerView,
         items: List<TrackItemDomainModel>?
     ) {
-        val adapter = recyclerView.adapter as TrackItemAdapter
-        adapter.let {
-            it.updateItems(items ?: listOf())
+        val adapter = getOrCreateAdapter(recyclerView)
+        adapter.updateItems(items ?: listOf())
+    }
 
-            // TODO: diffUtil 로 code 교체
-            it.notifyDataSetChanged()
+    @BindingAdapter("onTrackItemClick")
+    @JvmStatic
+    fun setTrackItemClick(
+        recyclerView: RecyclerView,
+        listener: TrackItemAdapter.OnItemClickListener?
+    ) {
+        val adapter = getOrCreateAdapter(recyclerView)
+        adapter.setOnItemClickListener(listener)
+    }
+
+    private fun getOrCreateAdapter(recyclerView: RecyclerView): TrackItemAdapter {
+        return if (recyclerView.adapter != null
+            && recyclerView.adapter is TrackItemAdapter
+        ) {
+            recyclerView.adapter as TrackItemAdapter
+        } else {
+            val adapter = TrackItemAdapter()
+            recyclerView.adapter = adapter
+            adapter
         }
     }
 

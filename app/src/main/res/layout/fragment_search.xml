@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="view"
+            type="com.akado.itunessearch.ui.search.SearchFragment"/>
+
+        <variable
             name="viewModel"
             type="com.akado.itunessearch.ui.search.SearchViewModel" />
     </data>
@@ -19,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:trackItemAdapter="@{true}"
             app:trackItems="@{viewModel.list}"
+            app:onTrackItemClick="@{model->view.onItemClick(model)}"
             tools:itemCount="4"
             tools:listitem="@layout/view_track_item" />
 

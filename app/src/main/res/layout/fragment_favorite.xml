@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:trackItemAdapter="@{true}"
             app:trackItems="@{viewModel.list}"
             tools:itemCount="4"
             tools:listitem="@layout/view_track_item" />
