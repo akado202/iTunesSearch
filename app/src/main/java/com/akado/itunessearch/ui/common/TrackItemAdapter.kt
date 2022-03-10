@@ -4,32 +4,46 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.akado.itunessearch.R
 import com.akado.itunessearch.databinding.ViewTrackItemBinding
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
 
 class TrackItemAdapter(
-    private var onItemClickListener: OnItemClickListener? = null
+    private var onItemClickListener: OnItemClickListener? = null,
+    private var onItemFavoriteCallback: OnItemFavoriteCallback? = null
 ) : RecyclerView.Adapter<TrackItemAdapter.ViewHolder>() {
 
-    private var items: List<TrackItemDomainModel> = listOf()
+    private var items: MutableList<TrackItemDomainModel> = mutableListOf()
+    private var favoriteStates: List<Boolean> = listOf()
 
     interface OnItemClickListener {
         fun onItemClick(model: TrackItemDomainModel)
+    }
+
+    interface OnItemFavoriteCallback {
+        fun isFavorite(model: TrackItemDomainModel): Boolean
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener?) {
         this.onItemClickListener = listener
     }
 
-    fun updateItems() {
-        updateItems(this.items)
+    fun setOnItemFavoriteCallback(listener: OnItemFavoriteCallback?) {
+        this.onItemFavoriteCallback = listener
     }
 
     fun updateItems(items: List<TrackItemDomainModel>) {
-        val diffCallback = DiffUtilCallback(this.items, items)
+        val newFavoriteStates: MutableList<Boolean> = mutableListOf()
+        items.forEach { newFavoriteStates.add(onItemFavoriteCallback?.isFavorite(it) == true) }
+
+        val diffCallback = DiffUtilCallback(this.items, items, this.favoriteStates, newFavoriteStates)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 
-        this.items = items
+        this.items.run {
+            clear()
+            addAll(items)
+        }
+        this.favoriteStates = newFavoriteStates;
         diffResult.dispatchUpdatesTo(this)
     }
 
@@ -48,6 +62,10 @@ class TrackItemAdapter(
 
         holder.bind(model)
         holder.binding.ivFavorite.setOnClickListener { onItemClickListener?.onItemClick(model) }
+        holder.binding.ivFavorite.setImageResource(
+            if (onItemFavoriteCallback?.isFavorite(model) == true) R.drawable.ic_star
+            else R.drawable.ic_star_outline
+        )
     }
 
     class ViewHolder(val binding: ViewTrackItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -59,7 +77,10 @@ class TrackItemAdapter(
 
     class DiffUtilCallback(
         private val oldList: List<TrackItemDomainModel>,
-        private val newList: List<TrackItemDomainModel>
+        private val newList: List<TrackItemDomainModel>,
+
+        private val oldFavoriteStates: List<Boolean>,
+        private val newFavoriteStates: List<Boolean>,
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
 
@@ -72,6 +93,9 @@ class TrackItemAdapter(
             val oldItem = oldList[oldItemPosition]
             val newItem = newList[newItemPosition]
 
+            val oldState = oldFavoriteStates[oldItemPosition]
+            val newState = newFavoriteStates[newItemPosition]
+
             return oldItem.artistId == newItem.artistId
                     && oldItem.collectionId == newItem.collectionId
                     && oldItem.trackId == newItem.trackId
@@ -79,7 +103,7 @@ class TrackItemAdapter(
                     && oldItem.collectionName == newItem.collectionName
                     && oldItem.trackName == newItem.trackName
                     && oldItem.artworkUrl60 == newItem.artworkUrl60
-                    && oldItem.isFavorite == newItem.isFavorite
+                    && oldState == newState
         }
     }
 }

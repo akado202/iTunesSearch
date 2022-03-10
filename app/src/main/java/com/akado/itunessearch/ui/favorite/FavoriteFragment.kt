@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.akado.itunessearch.databinding.FragmentFavoriteBinding
+import com.akado.itunessearch.ui.common.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
-    private val viewModel by viewModels<FavoriteViewModel>()
+    private val viewModel by activityViewModels<MainViewModel>()
     private var _binding: FragmentFavoriteBinding? = null
 
     // This property is only valid between onCreateView and
@@ -34,7 +36,7 @@ class FavoriteFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.request()
+        viewModel.refresh()
     }
 
     override fun onDestroyView() {

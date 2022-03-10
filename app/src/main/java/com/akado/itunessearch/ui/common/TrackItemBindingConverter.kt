@@ -29,6 +29,16 @@ object TrackItemBindingConverter {
         adapter.setOnItemClickListener(listener)
     }
 
+    @BindingAdapter("onItemFavoriteCallback")
+    @JvmStatic
+    fun setFavoriteTrackItems(
+        recyclerView: RecyclerView,
+        listener: TrackItemAdapter.OnItemFavoriteCallback?
+    ) {
+        val adapter = getOrCreateAdapter(recyclerView)
+        adapter.setOnItemFavoriteCallback(listener)
+    }
+
     private fun getOrCreateAdapter(recyclerView: RecyclerView): TrackItemAdapter {
         return if (recyclerView.adapter != null
             && recyclerView.adapter is TrackItemAdapter
@@ -48,11 +58,5 @@ object TrackItemBindingConverter {
             .load(url)
             .centerCrop()
             .into(imageView)
-    }
-
-    @BindingAdapter("trackItemFavorite")
-    @JvmStatic
-    fun setTrackItemFavorite(imageView: ImageView, isFavorite: Boolean) {
-        imageView.setImageResource(if (isFavorite) R.drawable.ic_star else R.drawable.ic_star_outline)
     }
 }

@@ -14,7 +14,6 @@ object TrackItemDomainMapper : DomainMapper<TrackItemData, TrackItemDomainModel>
             collectionName = from.collectionName,
             trackName = from.trackName,
             artworkUrl60 = from.artworkUrl60,
-            isFavorite = from.isFavorite
         )
     }
 
@@ -27,7 +26,6 @@ object TrackItemDomainMapper : DomainMapper<TrackItemData, TrackItemDomainModel>
             collectionName = from.collectionName,
             trackName = from.trackName,
             artworkUrl60 = from.artworkUrl60,
-            isFavorite = from.isFavorite
         )
     }
 }

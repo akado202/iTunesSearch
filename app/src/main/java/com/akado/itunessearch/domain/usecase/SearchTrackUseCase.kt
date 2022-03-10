@@ -3,6 +3,7 @@ package com.akado.itunessearch.domain.usecase
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
 import com.akado.itunessearch.domain.repository.TrackRepository
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -13,5 +14,6 @@ class SearchTrackUseCase @Inject constructor (
         return repository.requestSearchTrack("greenday", "song", 30, 0)
             .toFlowable()
             .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

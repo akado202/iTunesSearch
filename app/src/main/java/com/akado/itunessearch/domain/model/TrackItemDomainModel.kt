@@ -8,5 +8,4 @@ data class TrackItemDomainModel(
     val collectionName: String,
     val trackName: String,
     val artworkUrl60: String,
-    var isFavorite: Boolean,
 )

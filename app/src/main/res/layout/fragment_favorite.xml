@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.akado.itunessearch.ui.favorite.FavoriteViewModel" />
+            type="com.akado.itunessearch.ui.common.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,8 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:onItemFavoriteCallback="@{model->viewModel.isFavoriteTrack(model)}"
             app:onTrackItemClick="@{model->viewModel.toggleFavoriteTrack(model)}"
-            app:trackItems="@{viewModel.list}"
+            app:trackItems="@{viewModel.favoriteList}"
             tools:itemCount="4"
             tools:listitem="@layout/view_track_item" />
 

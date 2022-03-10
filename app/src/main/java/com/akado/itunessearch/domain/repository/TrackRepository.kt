@@ -15,5 +15,7 @@ interface TrackRepository {
 
     fun requestFavoriteTrack(): Single<List<TrackItemDomainModel>>
 
-    fun toggleFavoriteTrack(model: TrackItemDomainModel): Completable
+    fun setFavoriteTrack(model: TrackItemDomainModel): Completable
+
+    fun unsetFavoriteTrack(model: TrackItemDomainModel): Completable
 }

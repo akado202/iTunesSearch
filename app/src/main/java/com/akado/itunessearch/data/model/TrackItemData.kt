@@ -8,5 +8,4 @@ data class TrackItemData(
     val collectionName: String,
     val trackName: String,
     val artworkUrl60: String,
-    var isFavorite: Boolean
 )

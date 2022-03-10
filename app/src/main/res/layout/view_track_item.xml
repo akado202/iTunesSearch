@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.akado.itunessearch.domain.model.TrackItemDomainModel" />
@@ -113,8 +111,7 @@
             android:padding="2dp"
             app:layout_constraintBottom_toBottomOf="@id/cv_frame"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintTop_toBottomOf="@id/tv_collection_name"
-            app:trackItemFavorite="@{viewModel.isFavorite}" />
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_name" />
 
         <View
             android:layout_width="match_parent"

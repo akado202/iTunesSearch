@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.akado.itunessearch.ui.search.SearchViewModel" />
+            type="com.akado.itunessearch.ui.common.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,8 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:onTrackItemClick="@{model->viewModel.toggleFavoriteTrack(model)}"
-            app:trackItems="@{viewModel.list}"
+            app:onItemFavoriteCallback="@{model->viewModel.isFavoriteTrack(model)}"
+            app:trackItems="@{viewModel.searchList}"
             tools:itemCount="4"
             tools:listitem="@layout/view_track_item" />
 

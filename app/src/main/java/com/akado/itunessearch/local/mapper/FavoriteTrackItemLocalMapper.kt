@@ -14,7 +14,6 @@ object FavoriteTrackItemLocalMapper : LocalMapper<TrackEntity, TrackItemData> {
             collectionName = from.collectionName,
             trackName = from.trackName,
             artworkUrl60 = from.artworkUrl60,
-            isFavorite = true
         )
     }
 
