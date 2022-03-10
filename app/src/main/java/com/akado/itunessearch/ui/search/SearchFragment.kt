@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.akado.itunessearch.databinding.FragmentSearchBinding
-import com.akado.itunessearch.domain.model.TrackItemDomainModel
+import com.akado.itunessearch.ui.common.TrackItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,22 +28,21 @@ class SearchFragment : Fragment() {
     ): View? {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.let {
-            it.view = this
             it.viewModel = viewModel
             it.lifecycleOwner = viewLifecycleOwner
         }
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (binding.recyclerView.adapter is TrackItemAdapter) {
+            (binding.recyclerView.adapter as TrackItemAdapter).updateItems()
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun onItemClick(model: TrackItemDomainModel) {
-        Log.v(
-            "TrackItemAdapter",
-            "OnClick ivFavorite. ${model.trackId} : ${model.trackName}"
-        )
     }
 }

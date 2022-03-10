@@ -48,7 +48,7 @@ class LocalUnitTest {
         println("testGetAll")
         trackDao.getAll()
             .doOnSuccess { println("output") }
-            .doOnSuccess { it.map { println(" - ${it.id}. ${it.artistId} / ${it.artistName}") } }
+            .doOnSuccess { it.map { println(" - ${it.artistId} / ${it.artistName}") } }
             .test()
             .awaitDone(3, TimeUnit.SECONDS)
             .assertComplete()
@@ -73,15 +73,15 @@ class LocalUnitTest {
             .assertComplete()
     }
 
-    @Test
-    fun testDelete() {
-        println("testDelete")
-        trackDao.delete(1)
-            .doOnComplete { println("Delete complete") }
-            .test()
-            .awaitDone(3, TimeUnit.SECONDS)
-            .assertComplete()
-    }
+//    @Test
+//    fun testDelete() {
+//        println("testDelete")
+//        trackDao.delete(1)
+//            .doOnComplete { println("Delete complete") }
+//            .test()
+//            .awaitDone(3, TimeUnit.SECONDS)
+//            .assertComplete()
+//    }
 
     @Test
     fun testDeleteAll() {

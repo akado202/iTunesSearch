@@ -1,6 +1,7 @@
 package com.akado.itunessearch.domain.repository
 
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
+import io.reactivex.Completable
 import io.reactivex.Single
 
 interface TrackRepository {
@@ -13,4 +14,6 @@ interface TrackRepository {
     ): Single<List<TrackItemDomainModel>>
 
     fun requestFavoriteTrack(): Single<List<TrackItemDomainModel>>
+
+    fun toggleFavoriteTrack(model: TrackItemDomainModel): Completable
 }

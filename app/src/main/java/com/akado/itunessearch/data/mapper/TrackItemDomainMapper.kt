@@ -14,6 +14,20 @@ object TrackItemDomainMapper : DomainMapper<TrackItemData, TrackItemDomainModel>
             collectionName = from.collectionName,
             trackName = from.trackName,
             artworkUrl60 = from.artworkUrl60,
+            isFavorite = from.isFavorite
+        )
+    }
+
+    override fun modelToMap(from: TrackItemDomainModel): TrackItemData {
+        return TrackItemData(
+            artistId = from.artistId,
+            collectionId = from.collectionId,
+            trackId = from.trackId,
+            artistName = from.artistName,
+            collectionName = from.collectionName,
+            trackName = from.trackName,
+            artworkUrl60 = from.artworkUrl60,
+            isFavorite = from.isFavorite
         )
     }
 }

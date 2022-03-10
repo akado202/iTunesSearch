@@ -11,14 +11,17 @@ import io.reactivex.Single
 @Dao
 interface TrackDao {
 
+    @Query("SELECT * FROM Track WHERE trackId=:trackId")
+    fun get(trackId: Long): TrackEntity?
+
     @Query("SELECT * FROM Track")
     fun getAll(): Single<List<TrackEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: TrackEntity): Completable
 
-    @Query("DELETE FROM Track WHERE id=:id")
-    fun delete(id: Long): Completable
+    @Query("DELETE FROM Track WHERE trackId=:trackId")
+    fun deleteByTrackId(trackId: Long): Completable
 
     @Query("DELETE FROM Track")
     fun deleteAll(): Completable

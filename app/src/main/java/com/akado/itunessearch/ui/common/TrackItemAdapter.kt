@@ -2,6 +2,7 @@ package com.akado.itunessearch.ui.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.akado.itunessearch.databinding.ViewTrackItemBinding
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
@@ -20,11 +21,16 @@ class TrackItemAdapter(
         this.onItemClickListener = listener
     }
 
-    fun updateItems(items: List<TrackItemDomainModel>) {
-        this.items = items
+    fun updateItems() {
+        updateItems(this.items)
+    }
 
-        // TODO: diffUtil code here
-        notifyDataSetChanged()
+    fun updateItems(items: List<TrackItemDomainModel>) {
+        val diffCallback = DiffUtilCallback(this.items, items)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
+        this.items = items
+        diffResult.dispatchUpdatesTo(this)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,6 +54,32 @@ class TrackItemAdapter(
 
         fun bind(model: TrackItemDomainModel) {
             binding.viewModel = model
+        }
+    }
+
+    class DiffUtilCallback(
+        private val oldList: List<TrackItemDomainModel>,
+        private val newList: List<TrackItemDomainModel>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize(): Int = oldList.size
+
+        override fun getNewListSize(): Int = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+            oldList[oldItemPosition] == newList[newItemPosition]
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            val oldItem = oldList[oldItemPosition]
+            val newItem = newList[newItemPosition]
+
+            return oldItem.artistId == newItem.artistId
+                    && oldItem.collectionId == newItem.collectionId
+                    && oldItem.trackId == newItem.trackId
+                    && oldItem.artistName == newItem.artistName
+                    && oldItem.collectionName == newItem.collectionName
+                    && oldItem.trackName == newItem.trackName
+                    && oldItem.artworkUrl60 == newItem.artworkUrl60
+                    && oldItem.isFavorite == newItem.isFavorite
         }
     }
 }

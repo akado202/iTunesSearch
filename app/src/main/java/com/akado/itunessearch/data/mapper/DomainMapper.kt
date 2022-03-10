@@ -1,6 +1,8 @@
 package com.akado.itunessearch.data.mapper
 
-interface DomainMapper<in V, out D> {
+interface DomainMapper<V, D> {
 
     fun mapToModel(from: V): D
+
+    fun modelToMap(from: D): V
 }

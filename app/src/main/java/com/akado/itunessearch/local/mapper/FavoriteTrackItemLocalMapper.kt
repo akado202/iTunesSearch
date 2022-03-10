@@ -14,6 +14,19 @@ object FavoriteTrackItemLocalMapper : LocalMapper<TrackEntity, TrackItemData> {
             collectionName = from.collectionName,
             trackName = from.trackName,
             artworkUrl60 = from.artworkUrl60,
+            isFavorite = true
+        )
+    }
+
+    override fun dataToMap(from: TrackItemData): TrackEntity {
+        return TrackEntity(
+            artistId = from.artistId,
+            collectionId = from.collectionId,
+            trackId = from.trackId,
+            artistName = from.artistName,
+            collectionName = from.collectionName,
+            trackName = from.trackName,
+            artworkUrl60 = from.artworkUrl60,
         )
     }
 }

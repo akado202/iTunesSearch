@@ -3,6 +3,7 @@ package com.akado.itunessearch.ui.common
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.akado.itunessearch.R
 import com.akado.itunessearch.domain.model.TrackItemDomainModel
 import com.bumptech.glide.Glide
 
@@ -47,5 +48,11 @@ object TrackItemBindingConverter {
             .load(url)
             .centerCrop()
             .into(imageView)
+    }
+
+    @BindingAdapter("trackItemFavorite")
+    @JvmStatic
+    fun setTrackItemFavorite(imageView: ImageView, isFavorite: Boolean) {
+        imageView.setImageResource(if (isFavorite) R.drawable.ic_star else R.drawable.ic_star_outline)
     }
 }

@@ -14,6 +14,7 @@ object SearchResultRemoteMapper : RemoteMapper<SearchResultRemoteModel, TrackIte
             collectionName = from.collectionName,
             trackName = from.trackName,
             artworkUrl60 = from.artworkUrl60,
+            isFavorite = false
         )
     }
 }

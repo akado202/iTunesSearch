@@ -109,12 +109,12 @@
             android:id="@+id/iv_favorite"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            android:background="@drawable/bg_ripple_round_10_effect"
+            android:background="@drawable/bg_ripple_round_effect"
             android:padding="2dp"
-            android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="@id/cv_frame"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"
-            app:layout_constraintTop_toBottomOf="@id/tv_collection_name" />
+            app:layout_constraintTop_toBottomOf="@id/tv_collection_name"
+            app:trackItemFavorite="@{viewModel.isFavorite}" />
 
         <View
             android:layout_width="match_parent"
